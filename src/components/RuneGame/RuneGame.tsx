@@ -74,7 +74,7 @@ const RuneGame: React.FC = () => {
       {!isReading && (
         <div className="rune-setup">
           <div className="spread-selector">
-            <h3>选择占卜方式：</h3>
+            <h3>请选择占卜方式：</h3>
             <div className="spread-options">
               {Object.entries(runeSpreadTypes).map(([key, name]) => (
                 <button
