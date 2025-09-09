@@ -1,0 +1,762 @@
+.lotto-game-container {
+  text-align: center;
+  margin: 20px auto;
+  font-family: 'Arial', sans-serif;
+  max-width: 1000px;
+  padding: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  color: white;
+}
+
+/* 球池容器样式 */
+.ball-containers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 20px 0;
+  padding: 20px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+}
+
+.container-section {
+  text-align: center;
+}
+
+.container-section h3 {
+  margin: 0 0 15px 0;
+  color: #FFF;
+  font-size: 16px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.ball-container {
+  position: relative;
+  width: 300px;
+  height: 180px;
+  margin: 0 auto;
+  border: 3px solid rgba(255,255,255,0.3);
+  border-radius: 15px;
+  background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+  overflow: hidden;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
+}
+
+.ball-container.red {
+  border-color: rgba(255, 71, 87, 0.5);
+  background: linear-gradient(45deg, rgba(255, 71, 87, 0.1), rgba(255, 71, 87, 0.05));
+}
+
+.ball-container.blue {
+  border-color: rgba(30, 144, 255, 0.5);
+  background: linear-gradient(45deg, rgba(30, 144, 255, 0.1), rgba(30, 144, 255, 0.05));
+}
+
+.ball-in-container {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.ball-in-container.red {
+  background: linear-gradient(135deg, #ff4757, #c44569);
+  border: 1px solid #ff4757;
+}
+
+.ball-in-container.blue {
+  background: linear-gradient(135deg, #1e90ff, #0c7cd5);
+  border: 1px solid #1e90ff;
+}
+
+.ball-in-container.selected {
+  transform: scale(1.5);
+  z-index: 10;
+  animation: pulse 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+  from {
+    box-shadow: 0 0 10px rgba(255,255,255,0.5);
+  }
+  to {
+    box-shadow: 0 0 20px rgba(255,255,255,0.8);
+  }
+}
+
+
+@keyframes bounce {
+  from { transform: translateX(-50%) translateY(0); }
+  to { transform: translateX(-50%) translateY(-5px); }
+}
+
+.draw-button {
+  padding: 12px 25px;
+  font-size: 18px;
+  cursor: pointer;
+  background-color: #ff4757;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  transition: background-color 0.3s, transform 0.1s;
+}
+
+.draw-button:disabled {
+  background-color: #b2bec3;
+  cursor: not-allowed;
+}
+
+.draw-button:active {
+    transform: scale(0.98);
+}
+
+.button-group {
+  margin: 15px 0;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.reset-button {
+  padding: 12px 25px;
+  font-size: 18px;
+  cursor: pointer;
+  background-color: #fa7a03 !important; /* 橙色 - 使用 !important 确保优先级 */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  transition: background-color 0.3s, transform 0.1s;
+}
+
+.reset-button:active {
+    transform: scale(0.98);
+}
+
+.memory-button {
+    padding: 12px 25px;
+    margin-left: 15px;
+    font-size: 18px;
+    cursor: pointer;
+    background-color: #07d407 !important; /* 绿色 - 使用 !important 确保优先级 */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    transition: background-color 0.3s, transform 0.1s;
+}
+.official-button {
+    padding: 12px 25px;
+    margin-left: 15px;
+    font-size: 18px;
+    cursor: pointer;
+    background-color: #09ada5 !important; /* 绿色 - 使用 !important 确保优先级 */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+.memory-button:active {
+    transform: scale(0.98);
+}
+
+.official-button:active {
+    transform: scale(0.98);
+}
+
+.drawn-balls-container {
+  text-align: center;
+}
+
+.balls-display {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+  min-height: 60px;
+  align-items: center;
+}
+
+.results-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin: 30px 0;
+  padding: 20px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+}
+
+.drawn-balls-container h3 {
+  margin: 0 0 10px 0;
+  color: #FFF;
+  font-size: 18px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.ball {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+  transition: transform 0.2s;
+}
+
+.ball:hover {
+  transform: scale(1.1);
+}
+
+.ball.empty {
+  background-color: rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.6);
+  border: 2px dashed rgba(255,255,255,0.4);
+  box-shadow: none;
+}
+
+.ball.small {
+  width: 35px;
+  height: 35px;
+  font-size: 14px;
+  margin: 0 3px;
+}
+
+.ball.tiny {
+  width: 30px;
+  height: 30px;
+  font-size: 12px;
+  margin: 0 2px;
+}
+
+.ball.red {
+  background-color: #ff4757; /* 红色 */
+}
+
+.ball.blue {
+  background-color: #1e90ff; /* 蓝色 */
+}
+
+.ball.falling {
+  position: absolute;
+  top: -50px;
+  left: calc(50% - 22.5px);
+  animation: fall 1s ease-in forwards;
+  z-index: 10;
+}
+
+@keyframes fall {
+  from {
+    transform: translateY(0) rotate(0deg);
+  }
+  to {
+    transform: translateY(200px) rotate(360deg);
+  }
+}
+
+/* 新增功能区域样式 */
+.draw-sections {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin: 30px 0;
+  padding: 20px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+}
+
+.red-section, .blue-section {
+  padding: 15px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.red-section h3, .blue-section h3 {
+  margin: 0 0 15px 0;
+  color: #FFF;
+  font-size: 16px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.control-buttons {
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.draw-button.red {
+  background-color: #ff4757;
+  font-size: 14px;
+  padding: 8px 16px;
+}
+
+.draw-button.blue {
+  background-color: #1e90ff;
+  font-size: 14px;
+  padding: 8px 16px;
+}
+
+/* 信息展示区域 */
+.comparison-result, .official-result, .memorized-records {
+  margin: 20px 0;
+  padding: 15px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+}
+
+.comparison-result h4, .official-result h4, .memorized-records h4 {
+  margin: 0 0 10px 0;
+  color: #FFF;
+  font-size: 16px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.official-balls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.record {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 8px 0;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+/* 模态对话框样式 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+  color: white;
+  max-width: 500px;
+  width: 90%;
+}
+
+.modal h3 {
+  margin: 0 0 20px 0;
+  text-align: center;
+  font-size: 18px;
+}
+
+.input-group {
+  margin: 15px 0;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.modal-buttons button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.modal-buttons button:first-child {
+  background-color: #27ae60;
+  color: white;
+}
+
+.modal-buttons button:last-child {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.modal-buttons button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.records-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.manage-button {
+  padding: 8px 15px;
+  font-size: 12px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.manage-button:hover {
+  background-color: #2980b9;
+}
+
+.record-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.record-date {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.matches {
+  color: #f39c12;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+/* 记录管理模态框 */
+.records-modal {
+  max-width: 800px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  padding-bottom: 15px;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.records-list {
+  max-height: 400px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+}
+
+.record-item {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.record-main {
+  margin-bottom: 15px;
+}
+
+.record-date {
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.record-balls {
+  margin-bottom: 10px;
+}
+
+.balls-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.label {
+  font-size: 14px;
+  color: rgba(255,255,255,0.8);
+  min-width: 80px;
+}
+
+.official-date {
+  color: rgba(255,255,255,0.6);
+  font-size: 12px;
+  margin-left: 10px;
+}
+
+.match-result {
+  background: rgba(46, 204, 113, 0.2);
+  padding: 8px 12px;
+  border-radius: 5px;
+  color: #2ecc71;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.record-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.action-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background-color 0.3s;
+}
+
+.action-btn.add-official {
+  background-color: #3498db;
+  color: white;
+}
+
+.action-btn.edit {
+  background-color: #f39c12;
+  color: white;
+}
+
+.action-btn.delete {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.action-btn:hover {
+  opacity: 0.8;
+}
+
+.official-input {
+  background: rgba(255,255,255,0.05);
+  padding: 15px;
+  border-radius: 5px;
+  margin-top: 15px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.input-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.input-row label {
+  min-width: 80px;
+  font-size: 14px;
+  color: rgba(255,255,255,0.8);
+}
+
+.input-row input {
+  flex: 1;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 3px;
+  font-size: 14px;
+}
+
+.input-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.input-actions button {
+  padding: 6px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.input-actions button:first-child {
+  background-color: #27ae60;
+  color: white;
+}
+
+.input-actions button:last-child {
+  background-color: #95a5a6;
+  color: white;
+}
+
+/* 分页 */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 15px 0;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.page-btn {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  background-color: rgba(255,255,255,0.1);
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.page-btn:disabled {
+  background-color: rgba(255,255,255,0.05);
+  color: rgba(255,255,255,0.3);
+  cursor: not-allowed;
+}
+
+.page-btn:not(:disabled):hover {
+  background-color: rgba(255,255,255,0.2);
+}
+
+.page-info {
+  color: rgba(255,255,255,0.8);
+  font-size: 14px;
+}
+
+/* 编辑模态框 */
+.edit-modal {
+  max-width: 500px;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  margin: 20px 0;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .draw-sections, .results-container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .lotto-game-container {
+    margin: 10px;
+    padding: 15px;
+  }
+  
+  .modal {
+    margin: 20px;
+    padding: 20px;
+  }
+  
+  .records-modal {
+    max-width: 95%;
+    margin: 10px;
+  }
+  
+  .record-actions {
+    flex-direction: column;
+  }
+  
+  .input-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .input-row label {
+    min-width: auto;
+    margin-bottom: 5px;
+  }
+  
+  .pagination {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .red-grid {
+    grid-template-columns: repeat(7, 1fr);
+  }
+  
+  .blue-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .mode-switch {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .selection-controls {
+    flex-direction: column;
+  }
+  
+  .ball-containers {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .ball-container {
+    width: 280px;
+    height: 160px;
+  }
+}

@@ -1,0 +1,408 @@
+.coin-oracle {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  color: #ffffff;
+}
+
+.coin-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.coin-header h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+  background: linear-gradient(45deg, #ffd89b, #19547b);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.coin-header p {
+  font-size: 1.2rem;
+  color: #e8eaf6;
+}
+
+/* Input Section */
+.coin-input {
+  max-width: 800px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.question-section {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 30px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.question-section h3 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #ffd89b;
+  text-align: center;
+}
+
+.question-input {
+  width: 90%;
+  padding: 15px;
+  border: 2px solid rgba(255, 216, 155, 0.3);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  font-size: 1rem;
+  resize: vertical;
+  min-height: 80px;
+  backdrop-filter: blur(5px);
+}
+
+.question-input:focus {
+  outline: none;
+  border-color: #ffd89b;
+  box-shadow: 0 0 15px rgba(255, 216, 155, 0.3);
+}
+
+.question-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.start-divination-btn {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(45deg, #ffd89b, #19547b);
+  color: #ffffff;
+  border: none;
+  border-radius: 25px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 20px;
+  box-shadow: 0 4px 15px rgba(255, 216, 155, 0.3);
+}
+
+.start-divination-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 216, 155, 0.4);
+}
+
+.instruction-section {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  padding: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.instruction-section h4 {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  color: #ffd89b;
+}
+
+.instruction-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.instruction-section li {
+  margin-bottom: 10px;
+  padding-left: 20px;
+  position: relative;
+  line-height: 1.4;
+  color: #e8eaf6;
+}
+
+.instruction-section li::before {
+  content: '⚡';
+  position: absolute;
+  left: 0;
+  color: #ffd89b;
+}
+
+/* Flipping Section */
+.coin-flipping {
+  text-align: center;
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.question-display {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 25px;
+  margin-bottom: 40px;
+  backdrop-filter: blur(10px);
+}
+
+.question-display h3 {
+  color: #ffd89b;
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+}
+
+.question-display p {
+  font-size: 1.1rem;
+  color: #e8eaf6;
+  font-style: italic;
+}
+
+.flipping-area h4 {
+  color: #ffd89b;
+  margin-bottom: 30px;
+  font-size: 1.4rem;
+}
+
+.coins-row {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.coin-slot {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 216, 155, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.coin-slot.current {
+  border-color: #ffd89b;
+  box-shadow: 0 0 20px rgba(255, 216, 155, 0.5);
+}
+
+.coin-result {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  animation: coinReveal 0.5s ease-out;
+}
+
+@keyframes coinReveal {
+  from {
+    opacity: 0;
+    transform: scale(0) rotate(180deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+.coin-result.yang {
+  background: linear-gradient(45deg, #ff9a9e, #fecfef);
+  color: #333;
+}
+
+.coin-result.yin {
+  background: linear-gradient(45deg, #a8edea, #fed6e3);
+  color: #333;
+}
+
+.coin-flipping-animation {
+  font-size: 2rem;
+  animation: flip 0.6s linear infinite;
+}
+
+@keyframes flip {
+  0% { transform: rotateY(0deg); }
+  50% { transform: rotateY(180deg); }
+  100% { transform: rotateY(360deg); }
+}
+
+.coin-placeholder {
+  color: rgba(255, 216, 155, 0.5);
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+/* Result Section */
+.coin-result {
+  animation: slideIn 0.8s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.result-coins {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.result-coins h4 {
+  color: #ffd89b;
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+}
+
+.coins-display {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.result-coin {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.hexagram-result {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.hexagram-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 30px;
+  max-width: 600px;
+  width: 100%;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.hexagram-header {
+  text-align: center;
+  margin-bottom: 25px;
+  border-bottom: 2px solid rgba(255, 216, 155, 0.3);
+  padding-bottom: 20px;
+}
+
+.hexagram-header h3 {
+  font-size: 2.5rem;
+  color: #ffd89b;
+  margin-bottom: 10px;
+}
+
+.hexagram-meaning {
+  font-size: 1.2rem;
+  color: #e8eaf6;
+  font-style: italic;
+}
+
+.hexagram-content {
+  text-align: left;
+}
+
+.interpretation-section, .advice-section {
+  margin-bottom: 20px;
+}
+
+.interpretation-section h4, .advice-section h4 {
+  color: #ffd89b;
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+  border-left: 3px solid #ffd89b;
+  padding-left: 10px;
+}
+
+.interpretation-section p, .advice-section p {
+  line-height: 1.6;
+  color: #e8eaf6;
+  font-size: 1rem;
+}
+
+/* Actions */
+.coin-actions {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.reset-btn {
+  padding: 12px 30px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid #ffd89b;
+  color: #ffd89b;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+.reset-btn:hover {
+  background: rgba(255, 216, 155, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .coin-oracle {
+    padding: 15px;
+  }
+  
+  .coin-header h1 {
+    font-size: 2.5rem;
+  }
+  
+  .coin-input {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  .question-section, .instruction-section {
+    padding: 20px;
+  }
+  
+  .coins-row {
+    gap: 15px;
+  }
+  
+  .coin-slot {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .coin-flipping-animation {
+    font-size: 1.5rem;
+  }
+  
+  .hexagram-card {
+    padding: 20px;
+    margin: 0 10px;
+  }
+  
+  .hexagram-header h3 {
+    font-size: 2rem;
+  }
+}
